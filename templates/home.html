@@ -1,0 +1,22 @@
+{% extends 'flask_user.html' %}
+
+{% block header %}
+  <h1>{% block title %}HomePage{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+   <nav>
+    <ul>
+        {% if current_user.is_authenticated %}
+            <li><a href="{{ url_for('rate_movies') }}">Rate Movies</a></li>
+            <li><a href="{{ url_for('recommendations') }}">View Recommended Movies</a></li>
+            <li><a href="{{ url_for('user.logout') }}">Sign out</a></li>
+        {% else %}
+            <li><a href="{{ url_for('user.register') }}">Register</a></li>
+            <li><a href="{{ url_for('user.login') }}">Sign in</a></li>
+        {% endif %}
+    </ul>
+</nav>
+
+
+{% endblock %}

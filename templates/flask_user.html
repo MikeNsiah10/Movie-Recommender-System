@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>{% block title %}Movie Recommender{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Movie Recommender</h1>
+            <nav>
+                <ul>
+                    <li class="sign-out">
+                        {% if current_user.is_authenticated %}
+                            <a href="{{ url_for('user.logout') }}">{{ current_user.username }}|Sign Out</a>
+                        {% endif %}
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    
+    <div class="content">
+        <div class="container">
+            {% block header %}{% endblock %}
+            {% for message in get_flashed_messages() %}
+                <div class="flash">{{ message }}</div>
+            {% endfor %}
+            {% block content %}{% endblock %}
+        </div>
+    </div>
+    
+    <div class="footer">
+        <p> Movie Recommender &copy; 2024</p>
+    </div>
+    
+</body>
+</html>
