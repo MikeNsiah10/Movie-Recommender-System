@@ -81,7 +81,7 @@ def rate_movies():
 
         if existing_rating:
             # Update the existing rating
-            return f' You have already rated the movie with {rating}.'
+            existing_rating.rating=rating
             
         else:
             # Create a new rating
@@ -90,10 +90,7 @@ def rate_movies():
 
         db.session.commit()
 
-        # Return a simple response (you can customize this as needed)
-        return f'Rating submitted successfully! You rated the movie with {rating}.'
-
-    return render_template("rating.html")  # You can adjust this based on your template structure
+    return render_template("rating.html",rating=rating)  # You can adjust this based on your template structure
 
 
 
