@@ -1,0 +1,75 @@
+{% extends 'flask_user.html' %}
+
+{% block title %}Movies{% endblock %}
+
+{% block content %}
+<div class="movies">
+    <h2>Movies</h2>
+    {% for movie in movies %}
+        <article class="movie">
+            <h3>{{ movie.title }}</h3>
+
+            <section class="details">
+                <h4>Genres:</h4>
+                <p>
+                    {% for genre in movie.genres %}
+                        {{ genre.genre }}{% if not loop.last %}, {% endif %}
+                    {% endfor %}
+                </p>
+
+                {% if movie.tags %}
+                    <h4>Tags:</h4>
+                    <p>
+                        {% for tag in movie.tags %}
+                            {{ tag.tag }}{% if not loop.last %}, {% endif %}
+                        {% endfor %}
+                    </p>
+                {% else %}
+                    <p>No tags available for this movie.</p>
+                {% endif %}
+                
+                <h4>Rate this Movie</h4>
+                <div class="rating-buttons" data-movie-id="{{ movie.id }}">
+                    <a href="#" class="card-link" data-rating="1">1</a>
+                    <a href="#" class="card-link" data-rating="2">2</a>
+                    <a href="#" class="card-link" data-rating="3">3</a>
+                    <a href="#" class="card-link" data-rating="4">4</a>
+                    <a href="#" class="card-link" data-rating="5">5</a>stars
+                </div>
+            </section>
+        </article>
+    {% endfor %}
+</div>
+<script>
+    function rateMovie(event) {
+        event.preventDefault();  // Prevent the default form submission
+
+        var movie_id = this.parentElement.getAttribute('data-movie-id');
+        var rating = this.getAttribute('data-rating');
+        var elem = this;
+
+        // Ajax request
+        var xhr = new XMLHttpRequest();
+        xhr.open('POST', '/rate_movies', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+
+        xhr.onload = function () {
+            if (xhr.status === 200) {
+                elem.parentElement.innerHTML = xhr.responseText;
+            } else {
+                alert('Request failed, return status of ' + xhr.status);
+            }
+        };
+
+        // Send the data to the server
+        xhr.send('movie_id=' + encodeURIComponent(movie_id) + '&rating=' + encodeURIComponent(rating));
+    }
+
+    var links = document.querySelectorAll('.rating-buttons .card-link');
+    for (var i = 0; i < links.length; i++) {
+        links[i].addEventListener('click', rateMovie);
+    }
+</script>
+
+
+{% endblock %}

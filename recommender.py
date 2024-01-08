@@ -23,6 +23,12 @@ class ConfigClass(object):
     USER_ENABLE_EMAIL = False  # Disable email authentication
     USER_ENABLE_USERNAME = True  # Enable username authentication
     USER_REQUIRE_RETYPE_PASSWORD = True  # Simplify register form
+
+    
+    USER_AFTER_REGISTER_ENDPOINT="home_page"
+    USER_AFTER_CONFIRM_ENDPOINT="home_page"
+    USER_AFTER_LOGIN_ENDPOINT="home_page"
+    USER_AFTER_LOGOUT_ENDPOINT="home_page"
     
 
 # Create Flask app
@@ -51,37 +57,44 @@ def home_page():
 @login_required
 def recommendations():
     # Get recommendations for the current user
-    recommended_movie_titles = get_recommendations(current_user.id)
+     recommended_movie_titles = get_recommendations(current_user.id)
 
-    return render_template('recommendations.html', recommended_movie_titles=recommended_movie_titles)
+     return render_template('recommendations.html', recommended_movie_titles=recommended_movie_titles)
 
 
-@app.route('/movies', methods=['GET', 'POST'])
+@app.route('/movies', methods=['GET'])
+def display_movies():
+    movies = Movie.query.limit(100).all()
+    return render_template("display_movies.html", movies=movies)
+
+
+@app.route('/rate_movies', methods=['POST'])
 @login_required  # User must be authenticated
 def rate_movies():
-    # String-based templates
-    #retrieve 100 movies from the database for testing
-    movies = Movie.query.limit(100).all()
-
     if request.method == 'POST':
-        # Handle movie rating submission
         movie_id = int(request.form.get('movie_id'))
-        rating = float(request.form.get('rating'))
+        rating = int(request.form.get('rating'))
+        user_id = current_user.id
 
         # Check if the user has already rated the movie
-        already_rated = MovieRating.query.filter_by(user_id=current_user.id, movie_id=movie_id).first()
+        existing_rating = MovieRating.query.filter_by(movie_id=movie_id, user_id=user_id).first()
 
-        if already_rated:
-            flash('You have already rated this movie', 'warning')
+        if existing_rating:
+            # Update the existing rating
+            return f' You have already rated the movie with {rating}.'
+            
         else:
-            # Create a new MovieRating entry
-            new_rating = MovieRating(user_id=current_user.id, movie_id=movie_id, rating=rating)
+            # Create a new rating
+            new_rating = MovieRating(movie_id=movie_id, user_id=user_id,rating=rating)
             db.session.add(new_rating)
-            db.session.commit()
 
-            flash('Rating submitted successfully', 'success')
+        db.session.commit()
 
-    return render_template("rate_movies.html", movies=movies)
+        # Return a simple response (you can customize this as needed)
+        return f'Rating submitted successfully! You rated the movie with {rating}.'
+
+    return render_template("rating.html")  # You can adjust this based on your template structure
+
 
 
 

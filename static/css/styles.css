@@ -90,22 +90,15 @@ p {
     margin: 0;
 }
 
-form {
-    margin-top: 10px;
+/* Add this CSS to your styles */
+.rating-buttons {
+    display: flex;  /* Use flexbox to display buttons horizontally */
 }
 
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 8px 15px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+.rating-buttons .card-link {
+    margin-right: 5px;  /* Adjust the margin as needed to separate the buttons */
 }
 
-button:hover {
-    background-color: #45a049;
-}
 
 .footer {
     padding: 10px;
