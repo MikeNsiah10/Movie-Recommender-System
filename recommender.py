@@ -64,6 +64,7 @@ def recommendations():
 
 @app.route('/movies', methods=['GET'])
 def display_movies():
+    #display 100 movies for testing purposes
     movies = Movie.query.limit(100).all()
     return render_template("display_movies.html", movies=movies)
 
@@ -77,23 +78,23 @@ def rate_movies():
         user_id = current_user.id
 
         # Check if the user has already rated the movie
-        existing_rating = MovieRating.query.filter_by(movie_id=movie_id, user_id=user_id).first()
+        already_rated = MovieRating.query.filter_by(movie_id=movie_id, user_id=user_id).first()
 
-        if existing_rating:
-            # Update the existing rating
+        if laready_rated:
+            # alert with a message
             return f' You have already rated the movie with {rating}.'
             
         else:
             # Create a new rating
             new_rating = MovieRating(movie_id=movie_id, user_id=user_id,rating=rating)
             db.session.add(new_rating)
-
+        #commit to database
         db.session.commit()
 
-        # Return a simple response (you can customize this as needed)
+        # Return a simple response 
         return f'Rating submitted successfully! You rated the movie with {rating}.'
 
-    return render_template("rating.html")  # You can adjust this based on your template structure
+    return render_template("rating.html") 
 
 
 
