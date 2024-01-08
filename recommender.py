@@ -71,7 +71,6 @@ def display_movies():
 @app.route('/rate_movies', methods=['POST'])
 @login_required  # User must be authenticated
 def rate_movies():
-    if request.method == 'POST':
         movie_id = int(request.form.get('movie_id'))
         rating = int(request.form.get('rating'))
         user_id = current_user.id
@@ -90,7 +89,7 @@ def rate_movies():
 
         db.session.commit()
 
-    return render_template("rating.html",rating=rating)  # You can adjust this based on your template structure
+        return render_template("rating.html",rating=rating)  # You can adjust this based on your template structure
 
 
 
