@@ -49,8 +49,9 @@
         var elem = this;
 
         // Ajax request
+        var url = "{{url_for('rate_movies')}}";
         var xhr = new XMLHttpRequest();
-        xhr.open('POST','/rate_movies', true);
+        xhr.open('POST',url, true);
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
 
         xhr.onload = function () {
