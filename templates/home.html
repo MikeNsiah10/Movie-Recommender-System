@@ -5,18 +5,26 @@
 {% endblock %}
 
 {% block content %}
-   <nav>
-    <ul>
-        {% if current_user.is_authenticated %}
-            <li><a href="{{ url_for('display_movies') }}">Movies</a></li>
-            <li><a href="{{ url_for('recommendations') }}">View Recommended Movies</a></li>
-            <li><a href="{{ url_for('user.logout') }}">Sign out</a></li>
-        {% else %}
-            <li><a href="{{ url_for('user.register') }}">Register</a></li>
-            <li><a href="{{ url_for('user.login') }}">Sign in</a></li>
-        {% endif %}
-    </ul>
-</nav>
-
-
+    <div class="navigation">
+        <div class="nav-item">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('display_movies') }}">Movies</a>
+            {% else %}
+                <a href="{{ url_for('user.register') }}">Register</a>
+            {% endif %}
+        </div>
+        <div class="nav-item">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('recommendations') }}">View Recommended Movies</a>
+            {% else %}
+                <a href="{{ url_for('user.login') }}">Sign in</a>
+            {% endif %}
+        </div>
+        <div class="nav-item">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('user.logout') }}">Sign out</a>
+            {% endif %}
+        </div>
+    </div>
 {% endblock %}
+
