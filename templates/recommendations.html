@@ -1,16 +1,24 @@
 {% extends "flask_user.html" %}
 
 {% block title %}Movie Recommendations{% endblock %}
-
 {% block content %}
-    <h1>Movie Recommendations</h1>
-    <p>Welcome, {{ current_user.username }}!</p>
+    <h1>Welcome {{ current_user.username }}</h1>
 
     <h2>These are the top recommended movies for you:</h2>
-    <ul>
-        {% for movie_title in recommended_movie_titles %}
-            <li>{{ movie_title }}</li>
-        {% endfor %}
-    </ul>
+    <table>
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Predicted Rating</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for movie_data in recommended_movies %}
+                <tr>
+                    <td>{{ movie_data.title }}</td>
+                    <td>{{ movie_data.rating }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}
-
