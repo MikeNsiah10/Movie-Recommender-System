@@ -56,13 +56,23 @@ def home_page():
 @app.route('/recommendations')
 @login_required
 def recommendations():
+    # Check for rated movies by user
+    user_ratings = MovieRating.query.filter_by(user_id=current_user.id).all()
+
+    if not user_ratings:
+        #normally current users have no ratings
+        # redirect the users to the movies page to rate movies before getting recommendations
+
+        return redirect(url_for('display_movies'))
+
     # Get recommendations for the current user
-     recommended_movie_titles = get_recommendations(current_user.id)
+    recommended_movies = get_recommendations(current_user.id)
 
-     return render_template('recommendations.html', recommended_movie_titles=recommended_movie_titles)
+    return render_template('recommendations.html', recommended_movies=recommended_movies)
+    
 
 
-@app.route('/movies', methods=['GET'])
+@app.route('/movies', methods=['GET','POST'])
 def display_movies():
     movies = Movie.query.limit(100).all()
     return render_template("display_movies.html", movies=movies)
@@ -81,6 +91,7 @@ def rate_movies():
         if existing_rating:
             # Update the existing rating
             existing_rating.rating=rating
+            return 'already rated this movie,please rate another movie'
             
         else:
             # Create a new rating
@@ -89,9 +100,7 @@ def rate_movies():
 
         db.session.commit()
 
-        return render_template("rating.html",rating=rating)  # You can adjust this based on your template structure
-
-
+        return render_template("rating.html",rating=rating) 
 
 
 
