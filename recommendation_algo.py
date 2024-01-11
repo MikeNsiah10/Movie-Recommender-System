@@ -46,7 +46,10 @@ def get_recommendations(user_id, num_recommendations=10):
     # Get the top N recommendations based on predicted ratings
     top_n = sorted(predictions, key=lambda x: x.est, reverse=True)[:num_recommendations]
 
-    # get the movie_titles 
-    recommended_movie_titles = [movies_df[movies_df['movie_id'] == prediction.iid]['title'].iloc[0] for prediction in top_n]
+    recommended_movies = [{
+        'title': movies_df[movies_df['movie_id'] == prediction.iid]['title'].iloc[0],
+        'rating': "{:.1f}".format(prediction.est)
+    } for prediction in top_n]
 
-    return recommended_movie_titles
+    return recommended_movies
+
