@@ -7,13 +7,8 @@ body {
     display: flex;
     flex-direction: column;
     min-height: 100vh;
-<<<<<<< HEAD
     background-color:#fff; 
  
-=======
-    background-color:teal; 
-    color: #fff;
->>>>>>> recommending/main
 }
  .home {
     font-size: 30px;
@@ -25,7 +20,6 @@ body {
     margin: 0 auto;
 }
 
-<<<<<<< HEAD
 .fa {
     font-size: 30px;
     margin:22px;
@@ -38,8 +32,6 @@ body {
     line-height:25px;
 }
 
-=======
->>>>>>> recommending/main
 header {
     background-color: black;
     margin: 0;
@@ -99,28 +91,16 @@ ul {
     list-style-type: none;
     padding: 0;
     display: flex;
-<<<<<<< HEAD
     align-items: center; 
 }
 
 li {
     margin-right: 10px; 
-=======
-    align-items: center; /* Center items vertically */
-}
-
-li {
-    margin-right: 10px; /* Adjust as needed for spacing between items */
->>>>>>> recommending/main
 }
 
 a {
     text-decoration: none;
-<<<<<<< HEAD
     
-=======
-    color: black;
->>>>>>> recommending/main
     
 }
 
@@ -165,7 +145,6 @@ p {
     margin-right: 5px;
 }
 
-<<<<<<< HEAD
 
 
 table {
@@ -183,30 +162,6 @@ th, td {
 
 th {
     background-color:hsl(0, 100%, 25%);
-=======
-.footer {
-    padding: 10px;
-    text-align: center;
-    background-color: black;
-}
-
-table {
-    width: 80%;
-    margin: 10px;
-    border-collapse:separate;
-    background-color: gray;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-th, td {
-    border: 1px solid #ddd;
-    padding: 8px;
-    text-align: left;
-}
-
-th {
-    background-color: #4285f4;
->>>>>>> recommending/main
     color: #fff;
 }
 .navigation {
@@ -215,21 +170,14 @@ th {
 }
 
 .nav-item {
-<<<<<<< HEAD
     margin: 25px; 
-=======
-    margin: 30px; 
->>>>>>> recommending/main
 }
 
 .nav-item a {
     text-decoration: none;
     color: black;
     display: block;
-<<<<<<< HEAD
     font-size: 22px;
     font-family: Arial, Helvetica, sans-serif;
-=======
->>>>>>> recommending/main
 }
 
