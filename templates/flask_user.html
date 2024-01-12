@@ -3,20 +3,24 @@
 <head>
     <meta charset="utf-8">
     <title>{% block title %}Movie Recommender{% endblock %}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
 </head>
 <body>
     <header>
         <div class="container">
-            <h1>Movie Recommender</h1>
+             <a href="{{url_for('display_movies')}}"><h1>Movie Recommender</h1></a>
             <nav>
                 <ul>
                     <li class="sign-out">
                         {% if current_user.is_authenticated %}
-                            <a href="{{ url_for('user.logout') }}">{{ current_user.username }}|Sign Out</a>
+                            <span>{{ current_user.username }} | </span>
+                            <a href="{{ url_for('recommendations') }}">Get Recommendations</a> | 
+                            <a href="{{ url_for('user.logout') }}">Sign Out</a>
                         {% endif %}
                     </li>
                 </ul>
+                
             </nav>
         </div>
     </header>

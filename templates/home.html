@@ -1,22 +1,22 @@
 {% extends 'flask_user.html' %}
 
 {% block header %}
-  <h1>{% block title %}HomePage{% endblock %}</h1>
+  <a href="{{ url_for('user.login') }}"><h1 class="home">HomePage</h1></a>
 {% endblock %}
 
 {% block content %}
-   <nav>
-    <ul>
-        {% if current_user.is_authenticated %}
-            <li><a href="{{ url_for('display_movies') }}">Movies</a></li>
-            <li><a href="{{ url_for('recommendations') }}">View Recommended Movies</a></li>
-            <li><a href="{{ url_for('user.logout') }}">Sign out</a></li>
-        {% else %}
-            <li><a href="{{ url_for('user.register') }}">Register</a></li>
-            <li><a href="{{ url_for('user.login') }}">Sign in</a></li>
-        {% endif %}
-    </ul>
-</nav>
-
-
+    <div class="navigation">
+        <div class="nav-item">
+            {% if current_user.is_authenticated %}
+                <a href="{{ url_for('display_movies') }}"><i class="fa fa-film"></i>Movies</a>
+                <a href="{{ url_for('recommendations') }}"><i class="fa fa-street-view"></i>Recommended Movies</a>
+                <a href="{{ url_for('user.logout') }}"><i class='fa fa-sign-out'></i>Sign out</a>
+            {% else %}
+                <a href="{{ url_for('description_page') }}"><i class="fa fa-info"></i>How the recommender works</a>
+                <a href="{{ url_for('user.register') }}"><i class="fa fa-vcard"></i>Register</a>
+                <a href="{{ url_for('user.login') }}"><i class="fa fa-user"></i>Sign in</a>
+            {% endif %}
+       </div>
+    </div>
 {% endblock %}
+

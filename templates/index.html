@@ -1,0 +1,18 @@
+{% extends 'flask_user.html' %}
+
+{% block header %}
+  <h3>Welcome to the movie recommender page description:</h3>
+{% endblock %}
+{% block content %}
+<p>The movie recommender works this way:</p><br>
+<p>The user must be signed in to access and rate movies</p><br>
+<p>New users must register. For new users,accessing recommended movies redirect them to the movies page 
+    to rate movies. New users have to rate movies before they can access recommended movies.
+    Accessing recommended movies is for users who have rated movies.
+</p><br>
+<p>For new users,after rating movies, they can use the get recommendations without going back to click on 
+    recommended movies.
+</p><br>
+<p>Please use the browser back button to go back after reading this. You can then sign_in.</p>
+
+{% endblock%}
