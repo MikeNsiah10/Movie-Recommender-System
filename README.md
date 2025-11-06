@@ -51,10 +51,23 @@ It is recommended to use a virtual environment to manage the dependencies for th
    Make sure you have the necessary libraries installed. You can use pip to install them:
    ```
        pip install -r requirements.txt
+   
    ```
    
+4.Initialise the database
+ ```
+       flask --app recommender.py initdb
 
-4. Run the app
+   
+   ```
+5.Reset using this
+ ```
+       rm instance/movie_recommender.sqlite
+
+   
+   ```
+
+6. Run the app
     ```
    flask --app recommender.py run or  flask --app recommender.py run --debug for debugging
     ```
