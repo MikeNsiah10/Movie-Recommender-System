@@ -29,6 +29,8 @@ class ConfigClass(object):
     USER_AFTER_CONFIRM_ENDPOINT="home_page"
     USER_AFTER_LOGIN_ENDPOINT="home_page"
     USER_AFTER_LOGOUT_ENDPOINT="home_page"
+
+    USER_PASSWORD_HASH = 'bcrypt'
     
 
 # Create Flask app
