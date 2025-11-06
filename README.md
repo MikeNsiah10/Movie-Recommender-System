@@ -55,9 +55,7 @@ It is recommended to use a virtual environment to manage the dependencies for th
    
 
 4. Run the app
-   '''
+    ```
    flask --app recommender.py run or  flask --app recommender.py run --debug for debugging
-   '''
+    ```
    
-## Purpose
-This code is implemented to make a comparative study between two different schemes of temporal coding: phase coding and time to first spike. The comparison is made examinating the accuracy, the loss and the energy efficiency(spikes generated during simulation of the model during training) for both stategies with the SuperSpike algorithm (surrogate gradient) from Norse.
